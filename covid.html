@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>COVID19 Tracker</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.core.min.js"></script>
+        <link rel="stylesheet" href="covid.css">
+    </head>
+    <body>
+        <div class="main">
+            <div class="header">
+                <form name="myForm">
+                    <input type="text" name="country" id="country" placeholder="country" required>
+                    <input type="date" name="startDate" id="startDate">
+                    <input type="date" name="endDate" id="endDate">
+                    <button type="submit" class="button" form="myForm" onclick="add()">submit</button>
+                </form>
+            </div>
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <form>
+                    <div class="container">
+                        <label><b>Confirmed Cases</b></label>
+                        <label><b>Active Cases</b></label>
+                        <label><b>Death Cases</b></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <script src="covid.js"></script>
+    </body>
+</html>
