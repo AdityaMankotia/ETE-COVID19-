@@ -33,7 +33,6 @@ function add(){
                 death = death + list[i].Deaths;
             }
             create(confirmedcase, active, death);
-
         }
     };
     xhttp1.send();
