@@ -1,44 +1,81 @@
 function add(){
-    var error=0;
     var country = document.getElementById("country").value;
     var sDate = document.getElementById("startDate").value;
     var eDate = document.getElementById("endDate").value;
     if(country=="" || sDate=="" || eDate==""){
         alert("No field should be blank");
-        error = 1;
+        return ;
     }
+    if (sDate === eDate) {
+        alert("Same date can't be passed");
+        return;
 
-
-
-
-
-
-
-
-
+    }
     var xhttp1 = new XMLHttpRequest();
-    var url = "https://api.covid19api.com/country/" + country + "?from=" + from + "T00:00:00Z&to=" + to + "T00:00:00Z";
+    var url = "https://api.covid19api.com/country/" + country + "?from=" + sDate + "T00:00:00Z&to=" +eDate + "T00:00:00Z";
 
-    document.getElementById("result_area").innerHTML = url;
     xhttp1.open("GET", url, true);
     xhttp1.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var list = JSON.parse(this.responseText);
-            var confirmedcase = 0;
-            var death = 0;
-            var active = 0;
             for (var i = 0; i < list.length; i++) {
-                confirmedcase = confirmedcase + list[i].Confirmed;
-                active = active + list[i].Active;
-                death = death + list[i].Deaths;
+                create(list[i].Confirmed, list[i].Active, list[i].Deaths);
             }
-            create(confirmedcase, active, death);
+
         }
     };
     xhttp1.send();
 
 }
 
+
+function create(confirmedcase, active, death) {
+    var parent = document.getElementById("final");
+
+    var divparent = document.createElement("div");
+
+    var cc = document.createElement("p");
+    var ctext = document.createTextNode("Confirmed cases  ");
+    cc.appendChild(ctext);
+
+    var s = document.createElement("span");
+    var stext = document.createTextNode(confirmedcase);
+
+    s.appendChild(stext);
+    cc.appendChild(s);
+
+    divparent.appendChild(cc);
+
+    var ac = document.createElement("p");
+    var atext = document.createTextNode("Active cases ");
+    ac.appendChild(atext);
+
+    var a = document.createElement("span");
+    var astext = document.createTextNode(active);
+
+    a.appendChild(astext);
+    ac.appendChild(a);
+
+    divparent.appendChild(ac);
+
+    var d = document.createElement("p");
+    var dtext = document.createTextNode("Death cases  ");
+    d.appendChild(dtext);
+
+    var dc = document.createElement("span");
+    var dctext = document.createTextNode(death);
+
+    dc.appendChild(dctext);
+    d.appendChild(dc);
+
+    divparent.appendChild(d);
+
+
+    divparent.setAttribute("class", "blue");
+
+    parent.appendChild(divparent);
+
+}
 
 
 
